@@ -1,22 +1,28 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+// Welcome.js
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Welcome = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userEmail');
-    navigate('/');
+    localStorage.removeItem("token");
+    localStorage.removeItem("userEmail");
+    navigate("/");
   };
 
   return (
-    <div className="container mt-5 d-flex justify-content-center">
-      <div className="card p-4 shadow" style={{ width: '400px' }}>
-        <h2 className="text-center">Welcome</h2>
-        <p className="text-center">You have successfully logged in!</p>
-        <button className="btn btn-primary w-100" onClick={handleLogout}>Logout</button>
+    <div className="container mt-5 d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+      <div className="card shadow-lg p-5 rounded-3" style={{ maxWidth: "400px", width: "100%" }}>
+        <h1 className="mb-4 text-primary">Welcome!</h1>
+        <p className="lead mb-4 text-secondary">You are successfully logged in.</p>
+        <button 
+          className="btn btn-danger w-100 py-2 mt-3"
+          onClick={handleLogout}
+          style={{ fontWeight: "bold" }}
+        >
+          Logout
+        </button>
       </div>
     </div>
   );

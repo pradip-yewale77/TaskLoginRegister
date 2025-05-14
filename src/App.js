@@ -1,21 +1,31 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import "./App.css";
 
-import './App.css';
-import { LoginRegistration } from './Component/LoginRegistration';
-import { Welcome } from './Component/Welcome';
+import { LoginRegistration } from "./Component/LoginRegistration";
+import { Welcome } from "./Component/Welcome";
+import PageNotFound from "./Component/PageNotFound";
+import Unauthorized from "./Component/Unauthorized";
+import ProtectedRoute from "./Component/ProtectedRoute";
 
 function App() {
   return (
-    <div>
-      <Routes>
-        {/* Default route */}
-        <Route path="/" element={<LoginRegistration/>} />
-
-        {/* Example: After login you could route to a Dashboard or Home */}
-        <Route path="/dashboard" element={<Welcome/>} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/" element={<LoginRegistration />} />
+      
+      {/* Protected Route */}
+      <Route 
+        path="/dashboard" 
+        element={
+          <ProtectedRoute>
+            <Welcome />
+          </ProtectedRoute>
+        } 
+      />
+      
+      <Route path="/unauthorized" element={<Unauthorized />} />
+      <Route path="*" element={<PageNotFound />} />
+    </Routes>
   );
 }
 

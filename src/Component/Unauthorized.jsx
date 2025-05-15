@@ -1,18 +1,30 @@
-// Unauthorized.js
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Unauthorized = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="container mt-5 d-flex justify-content-center align-items-center" style={{ height: "90vh" }}>
-      <div className="text-center p-5 border rounded shadow-lg" style={{ maxWidth: "600px" }}>
-        <h2 className="text-danger mb-3">Unauthorized Access</h2>
-        <p className="text-muted">You do not have permission to view this page.</p>
-        <Link to="/" className="btn btn-primary mt-3">Go to Login</Link>
+    <div className="container d-flex justify-content-center align-items-center min-vh-100 bg-light">
+      <div
+        className="card p-4 shadow-lg border-0"
+        style={{ maxWidth: "450px" }}
+      >
+        <h2 className="display-4 text-danger text-center">
+          403 - Unauthorized
+        </h2>
+        <p className="lead text-center text-muted">
+          You do not have permission to access this page.
+        </p>
+        <button
+          className="btn btn-primary w-100 mt-3"
+          onClick={() => navigate("/")}
+        >
+          Go to Login
+        </button>
       </div>
     </div>
   );
 };
 
 export default Unauthorized;
-

@@ -1,15 +1,23 @@
-// ProtectedRoute.js
+// src/Component/ProtectedRoute.js
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
-// Check if the user is authenticated (JWT stored in localStorage)
-const isAuthenticated = () => {
-  return localStorage.getItem("token") ? true : false;
-};
-
-// ProtectedRoute Component
 const ProtectedRoute = ({ children }) => {
-  return isAuthenticated() ? children : <Navigate to="/unauthorized" replace />;
+  const token = localStorage.getItem("authToken"); // Token from login
+  const location = useLocation();
+  // If token does not exist, redirect to unauthorized
+  if (!token) {
+    return <Navigate to="/unauthorized" replace />;
+  }
+
+  // If authenticated and trying to access /login, redirect to /dashboard
+  if (location.pathname === "/" || location.pathname === "/login") {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  // If token exists, allow access to the child component
+  return children;
 };
+
 
 export default ProtectedRoute;
